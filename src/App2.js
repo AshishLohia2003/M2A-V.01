@@ -22,6 +22,7 @@ const App2 = () => {
   const [theme, colorMode] = useMode();
   const [token, setToken] = useState(false);
 
+
   const [notificationPermission, setNotificationPermission] = useState(
     Notification.permission
   );
@@ -51,6 +52,7 @@ const App2 = () => {
     }
   }, []);
   console.log(token);
+ 
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -95,26 +97,8 @@ const App2 = () => {
         ) : (
           ""
         )}
-        {/* <Routes>
-                            {token ? <Route path={'/homepage'} element={<Homepage token={token} />} /> : ""}
-                        </Routes> */}
       </ThemeProvider>
     </ColorModeContext.Provider>
-
-    // <div>
-    //     <Routes>
-    //         <Route path={'/signup'} element={<SignUp />} />
-    //         <Route path={'/'} element={<Login setToken={setToken} />} />
-    //         <Route path="/dashboard" element={<Dashboard />} />
-    //         <Route path="/records" element={<Records />} />
-    //         <Route path="/machine2" element={<MachineProfile2 />} />
-    //         <Route path="/downtime" element={<Downtime />} />
-    //         <Route path="/" element={<Home />} />
-    //         <Route path="/records2" element={<Records2 />} />
-    //         {token ? <Route path={'/home'} element={<App token={token} />} /> : ""}
-
-    //     </Routes>
-    // </div>
   );
 };
 

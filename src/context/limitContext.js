@@ -12,7 +12,8 @@ const LimitProvider = ({ children, token }) => {
     token.user.user_metadata.database_url,
     token.user.user_metadata.api_key
   );
-
+  console.log(token.user.user_metadata.database_url,
+    token.user.user_metadata.api_key);
   useEffect(() => {
     const fetchData = async () => {
       const { data: machineData, error } = await supabase

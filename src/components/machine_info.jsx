@@ -1,5 +1,5 @@
 import { React, useContext } from "react";
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import { Box, Typography, useTheme, Button } from "@mui/material";
 import { tokens } from "../theme";
 import { SupabaseContext } from "../context/supabaseContext2";
@@ -21,41 +21,7 @@ const Machine_info = ({
 }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-  const isNonMobile = useMediaQuery("(min-width:600px)");
-
-    const notify2 = (parameter, machineName) => {
-        const navigate = useNavigate(); 
-        addNotification({
-            title: 'Warning',
-            subtitle: 'This is a subtitle',
-            message: `${parameter} of ${machineName} reached the limit`,
-            native: true,
-            duration: 50000,
-            image: 'https://i0.wp.com/made2automate.com/wp-content/uploads/2023/03/cropped-cropped-cropped-Untitled-design-2023-03-27T165416.581.png?w=261&ssl=1e', // Replace with the URL of your custom image
-            style: {
-                backgroundColor: colors.redAccent[500], // Customize background color
-                text: {
-                    color: colors.grey[100], // Customize text color
-                },
-            },
-            onClick: () => {
-                // Redirect the user to /machine2 when they click on the notification
-                navigate('/machine2');
-            },
-        });
-    };
-    const notify = (parameter, machineName) => {
-        toast.error(`${parameter} of ${machineName} reached the limit`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-        });
-    };
+    const isNonMobile = useMediaQuery("(min-width:600px)");
     const {
         selectedMachine,
         handleMachineSelect,
@@ -95,6 +61,32 @@ const Machine_info = ({
         Machine_11: machine11Readings,
     };
 
+    const notify2 = (parameter, machineName, navigate) => {
+        addNotification({
+            title: 'Warning',
+            subtitle: 'This is a subtitle',
+            message: `${parameter} of ${machineName} reached the limit`,
+            native: true,
+            duration: 50000,
+            onClick: () => {
+                // Redirect the user to /machine2 when they click on the notification
+                navigate('/machine2');
+            },
+        });
+    };
+    const notify = (parameter, machineName) => {
+        toast.error(`${parameter} of ${machineName} reached the limit`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
+    };
+
     const getAlertColor = (reading1, reading2) =>
         reading1 > reading2 ? colors.redAccent[500] : colors.greenAccent[500];
     const checkIfExceedsLimit = (machineReadings, machineName) => {
@@ -111,35 +103,35 @@ const Machine_info = ({
         } = machineReadings;
         if (parseInt(Voltage) > voltageLimit) {
             notify("Voltage", machineName);
-            notify2("Voltage", machineName);
+            notify2("Voltage", machineName, useNavigate());
         }
         if (parseInt(Temperature) > temperatureLimit) {
             notify("Temperature", machineName);
-            notify2("Temperature", machineName);
+            notify2("Temperature", machineName, useNavigate());
         }
         if (parseInt(Power) > powerLimit) {
             notify("Power", machineName);
-            notify2("Power", machineName);
+            notify2("Power", machineName, useNavigate());
         }
         if (parseInt(Moisture) > moistureLimit) {
             notify("Moisture", machineName);
-            notify2("Moisture", machineName);
+            notify2("Moisture", machineName, useNavigate());
         }
         if (parseInt(Performance) < performanceLimit) {
             notify("Performance", machineName);
-            notify2("Performance", machineName);
+            notify2("Performance", machineName, useNavigate());
         }
         if (parseInt(Current) > currentLimit) {
             notify("Current", machineName);
-            notify2("Current", machineName);
+            notify2("Current", machineName, useNavigate());
         }
         if (parseInt(Frequency) > frequencyLimit) {
             notify("Frequency", machineName);
-            notify2("Frequency", machineName);
+            notify2("Frequency", machineName, useNavigate());
         }
         if (parseInt(OEE) < oeeLimit) {
             notify("OEE", machineName);
-            notify2("OEE", machineName);
+            notify2("OEE", machineName, useNavigate());
         }
         if (
             parseInt(Voltage) > voltageLimit ||
