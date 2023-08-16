@@ -1,5 +1,4 @@
 import { React, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
 import { Box, Typography, useTheme, Button } from "@mui/material";
 import { tokens } from "../theme";
 import { SupabaseContext } from "../context/supabaseContext2";
@@ -61,7 +60,7 @@ const Machine_info = ({
         Machine_11: machine11Readings,
     };
 
-    const notify2 = (parameter, machineName, navigate) => {
+    const notify2 = (parameter, machineName) => {
         addNotification({
             title: 'Warning',
             subtitle: 'This is a subtitle',
@@ -70,7 +69,7 @@ const Machine_info = ({
             duration: 50000,
             onClick: () => {
                 // Redirect the user to /machine2 when they click on the notification
-                navigate('/machine2');
+               // navigate('/machine2');
             },
         });
     };
@@ -103,11 +102,11 @@ const Machine_info = ({
         } = machineReadings;
         if (parseInt(Voltage) > voltageLimit) {
             notify("Voltage", machineName);
-            notify2("Voltage", machineName, useNavigate());
+            notify2("Voltage", machineName);
         }
         if (parseInt(Temperature) > temperatureLimit) {
             notify("Temperature", machineName);
-            notify2("Temperature", machineName, useNavigate());
+            notify2("Temperature", machineName);
         }
         if (parseInt(Power) > powerLimit) {
             notify("Power", machineName);
@@ -115,23 +114,23 @@ const Machine_info = ({
         }
         if (parseInt(Moisture) > moistureLimit) {
             notify("Moisture", machineName);
-            notify2("Moisture", machineName, useNavigate());
+            notify2("Moisture", machineName);
         }
         if (parseInt(Performance) < performanceLimit) {
             notify("Performance", machineName);
-            notify2("Performance", machineName, useNavigate());
+            notify2("Performance", machineName);
         }
         if (parseInt(Current) > currentLimit) {
             notify("Current", machineName);
-            notify2("Current", machineName, useNavigate());
+            notify2("Current", machineName);
         }
         if (parseInt(Frequency) > frequencyLimit) {
             notify("Frequency", machineName);
-            notify2("Frequency", machineName, useNavigate());
+            notify2("Frequency", machineName);
         }
         if (parseInt(OEE) < oeeLimit) {
             notify("OEE", machineName);
-            notify2("OEE", machineName, useNavigate());
+            notify2("OEE", machineName);
         }
         if (
             parseInt(Voltage) > voltageLimit ||
