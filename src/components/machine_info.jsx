@@ -1,5 +1,4 @@
 import { React, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
 import { Box, Typography, useTheme, Button } from "@mui/material";
 import { tokens } from "../theme";
 import { SupabaseContext } from "../context/supabaseContext2";
@@ -71,7 +70,7 @@ const Machine_info = ({
             duration: 50000,
             onClick: () => {
                 // Redirect the user to /machine2 when they click on the notification
-                navigate('/machine2');
+               // navigate('/machine2');
             },
         });
     };
